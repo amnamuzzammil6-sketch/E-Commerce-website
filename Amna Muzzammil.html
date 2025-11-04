@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shoe Store</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f0f4f8;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 15px 30px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .logo img {
+        height: auto;
+        width: 130px;
+        max-width: 100%;
+        object-fit: scale-down;
+        padding: 5px;
+      }
+
+      .navbar ul {
+        display: flex;
+        list-style: none;
+        gap: 25px;
+      }
+
+      .navbar a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+
+      .navbar a:hover {
+        color: #f59e0b;
+      }
+
+      .navbar i {
+        margin-right: 6px;
+      }
+      .center-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .display-img {
+        margin: 40px auto;
+        background-image: url(Display\ image.jpg);
+        background-position: center center;
+        background-size: cover;
+        width: 90vw;
+        max-width: 1100px;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        margin: 0 auto;
+        transition: all 0.3s ease-in-out;
+        aspect-ratio: 16/9;
+      }
+      .display-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        text-align: left;
+        padding: 30pxpx;
+        position: relative;
+      }
+      .display-img:hover {
+        filter: brightness(1.05);
+        transform: scale(1.01);
+        transition: all 0.4s ease-in-out;
+        cursor: pointer;
+      }
+      .display-img h3 {
+        color: white;
+        margin-right: 10%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 3vw;
+        filter: drop-shadow(0px 2px 5px rgb(6, 6, 6));
+        margin-bottom: 10px;
+      }
+      .display-img p {
+        width: 400px;
+        color: rgb(255, 255, 255);
+        margin-right: 143px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        margin-bottom: 10%;
+        filter: drop-shadow(0px 2px 5px rgb(6, 6, 6));
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+      .img-box {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+      .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        background-color: #fff;
+        transition: all 0.3s ease-in-out;
+        max-width: 250px;
+      }
+
+      .card img {
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+      }
+
+      .card p {
+        font-size: 14px;
+        color: #555;
+        margin-top: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: x-small;
+        margin-bottom: 10px;
+      }
+      .card button {
+        background-color: #f2f2f2;
+        color: #333;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        display: inline-block;
+        margin-right: 5px;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+      }
+      .card:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+      .center-btn {
+        text-align: center;
+      }
+      .center-btn button {
+        background-color: #ffd580;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+      .card button:hover,
+      .center-btn button:hover {
+        background-color: #ffb700;
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+      }
+      .card button:active,
+      .center-btn button:active {
+        transform: scale(0.95);
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+      .footer {
+        display: grid;
+        grid-template-areas:
+          "A B"
+          "C C";
+        background-color: #fff;
+        padding: 30px;
+        margin-top: 40px;
+        border-top: 1px solid #ccc;
+      }
+
+      .contact-info h4,
+      .contact-form h4 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #222;
+      }
+
+      .contact-info p {
+        font-size: 14px;
+        color: #444;
+        margin-bottom: 6px;
+      }
+
+      .contact-info i {
+        margin-right: 8px;
+        color: #ffd580;
+      }
+
+      .contact-form {
+        text-align: right;
+      }
+
+      .contact-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        padding: 8px;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        width: 100%;
+      }
+
+      .contact-form button {
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .contact-form button i {
+        margin-right: 5px;
+      }
+
+      .contact-form button:hover {
+        background-color: #555;
+      }
+      .copy {
+        grid-area: C;
+        text-align: center;
+        font-size: x-large;
+        margin: 10px 0px;
+        color: #333;
+      }
+      @media (max-width: 600px) {
+        .display-img {
+          width: 95vw;
+          height: 50vh;
+          padding: 15px;
+        }
+        .display-img h3 {
+          font-size: 6vw;
+          margin-right: 5%;
+        }
+        .display-img p {
+          font-size: 4vw;
+        }
+      }
+      @media (max-width: 500px) {
+        .card h3 {
+          font-size: 16px;
+        }
+        .card p {
+          font-size: 12px;
+        }
+        .card button {
+          font-size: 10px;
+          padding: 4px 8px;
+        }
+        .center-btn button {
+          padding: 6px 12px;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="navbar">
+        <ul>
+          <li>
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-box"></i> Products</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-info-circle"></i> About</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class="center-wrapper">
+      <section class="display-img">
+        <h3>Charles Shoes</h3>
+        <p>
+          Discover timeless sophistication with our curated collection of high
+          quality shoes, crafted for comfort, style, and lasting impressions.
+          Whether it is casual outing or a formal event, step confidently with
+          Charles Shoes. step into elegance. explore premium comfort and
+          unmatched design with Charles Shoes. Where elegance meets evryday
+          style our shoes are designed with precision, quality materials, and a
+          passion for timeless fashion.
+        </p>
+      </section>
+    </div>
+
+    <section class="product-grid">
+      <div class="card">
+        <div class="img-box">
+          <img src="Product 1.webp" alt="Product 1" />
+        </div>
+        <h3>Classic Boots</h3>
+        <button>Small</button>
+        <button>Medium</button>
+        <p>
+          Lorem ipsum dolor sit amet. Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. Porro, a.
+        </p>
+        <div class="center-btn">
+          <button>Add To Cart</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img-box">
+          <img src="Product 2.webp" alt="Product 2" />
+        </div>
+        <h3>Royal Blue Exclusive</h3>
+        <button>Small</button>
+        <button>Medium</button>
+        <p>
+          Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Quia, suscipit!
+        </p>
+        <div class="center-btn">
+          <div class="center-btn">
+            <button>Add To Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img-box">
+          <img src="Product 3.png" alt="Product 3" />
+        </div>
+        <h3>Iconic Red Heels</h3>
+        <button>Small</button>
+        <button>Medium</button>
+        <p>
+          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Facilis, ut!
+        </p>
+        <div class="center-btn">
+          <button>Add To Cart</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img-box">
+          <img src="Product 4.webp" alt="Product 4" />
+        </div>
+        <h3>Daily Wears</h3>
+        <button>Small</button>
+        <button>Medium</button>
+        <p>
+          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Facilis, ut!
+        </p>
+        <div class="center-btn">
+          <button>Add To Cart</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img-box">
+        <img src="Product 5.webp" alt="Product 5" />
+        </div>
+        <h3>Comfy Shoes</h3>
+        <button>Small</button>
+        <button>Medium</button>
+        <p>
+          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Facilis, ut!
+        </p>
+        <div class="center-btn">
+          <button>Add To Cart</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img-box">
+        <img src="Product 6.jpeg" alt="Product 6" />
+        </div>
+        <h3>Joggers</h3>
+        <button>Small</button>
+        <button>Medium</button>
+        <p>
+          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Facilis, ut!
+        </p>
+        <div class="center-btn">
+          <button>Add To Cart</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img-box">
+        <img src="Product 7.avif" alt="Product 7" />
+        </div>
+        <h3>Lavish Butterscotch Heels</h3>
+        <button>Small</button>
+        <button>Medium</button>
+        <p>
+          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Facilis, ut!
+        </p>
+        <div class="center-btn">
+          <button>Add To Cart</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img-box">
+        <img src="Product 8.webp" alt="Product 8" />
+        </div>
+        <h3>Milky White Heels</h3>
+        <button>Small</button>
+        <button>Medium</button>
+        <p>
+          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Facilis, ut!
+        </p>
+        <div class="center-btn">
+          <button>Add To Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="contact-info">
+        <h4><i class="fas fa-address-card"></i> Contact Info</h4>
+        <p><i class="fas fa-envelope"></i> example@mail.com</p>
+        <p><i class="fas fa-phone"></i> 123-4567890</p>
+        <p><i class="fa-solid fa-globe"></i> &nbsp;www.charlesshoes.pk</p>
+        <p>
+          <i class="fa-solid fa-location-dot"></i> &nbsp;121 A1 Block Johar Town
+          Lahore
+        </p>
+      </div>
+
+      <div class="contact-form">
+        <h4><i class="fas fa-paper-plane"></i> Contact Us</h4>
+        <form>
+          <input type="text" placeholder="Your Name" />
+          <input type="email" placeholder="Your Email" />
+          <textarea rows="3" placeholder="Your Message"></textarea>
+          <button type="submit"><i class="fas fa-paper-plane"></i> Send</button>
+        </form>
+      </div>
+      <div class="copy">
+        <h6>&copy;CopyRight Reserved By Charles Shoes</h6>
+      </div>
+    </footer>
+
+    <script
+      src="https://kit.fontawesome.com/c4e853bafd.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
