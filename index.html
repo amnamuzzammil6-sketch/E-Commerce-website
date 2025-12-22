@@ -3,498 +3,338 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shoe Store</title>
+    <title>CHARLES | STREET KING</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/c4e853bafd.js" crossorigin="anonymous"></script>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
+      /* --- 1. THE VIBE --- */
+      :root {
+        --bg: #0a0a0a;
+        --card-bg: #111;
+        --accent: #ff3300; /* High Energy Red/Orange */
+        --white: #ffffff;
+        --grey: #444;
+        --border: rgba(255,255,255,0.1);
+        --font-head: 'Oswald', sans-serif;
+        --font-body: 'Inter', sans-serif;
       }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
 
       body {
-        background-color: #f0f4f8;
+        background-color: var(--bg);
+        color: var(--white);
+        font-family: var(--font-body);
+        overflow-x: hidden;
       }
 
+      a { text-decoration: none; color: inherit; transition: 0.3s; }
+      ul { list-style: none; }
+
+      /* --- 2. HEADER --- */
       .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #ffffff;
-        padding: 15px 30px;
-        border-bottom: 1px solid #ccc;
+        position: fixed; top: 0; width: 100%; z-index: 1000;
+        padding: 30px 50px;
+        display: flex; justify-content: space-between; align-items: center;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
       }
 
-      .logo img {
-        height: auto;
-        width: 130px;
-        max-width: 100%;
-        object-fit: scale-down;
-        padding: 5px;
+      .logo {
+        font-family: var(--font-head); font-size: 28px; letter-spacing: -1px; text-transform: uppercase;
+        font-weight: 700;
       }
+      .logo span { color: var(--accent); }
 
-      .navbar ul {
-        display: flex;
-        list-style: none;
-        gap: 25px;
-      }
+      .nav-links { display: flex; gap: 40px; }
+      .nav-links a { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #aaa; }
+      .nav-links a:hover { color: white; }
 
-      .navbar a {
-        text-decoration: none;
-        color: #333;
-        font-weight: bold;
-        font-size: 16px;
-        transition: color 0.3s;
-      }
+      .cart-btn { font-size: 20px; cursor: pointer; }
 
-      .navbar a:hover {
-        color: #f59e0b;
-      }
-
-      .navbar i {
-        margin-right: 6px;
-      }
-      .center-wrapper {
+      /* --- 3. THE "DEPTH" HERO SECTION --- */
+      .hero {
+        height: 100vh;
+        width: 100%;
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 20px 0;
+        overflow: hidden;
+        background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 70%);
       }
 
-      .display-img {
-        margin: 40px auto;
-        background-image: url(Display\ image.jpg);
-        background-position: center center;
-        background-size: cover;
-        width: 90vw;
-        max-width: 1100px;
-        background-repeat: no-repeat;
-        border-radius: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-        margin: 0 auto;
-        transition: all 0.3s ease-in-out;
-        aspect-ratio: 16/9;
-      }
-      .display-img {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: flex-end;
-        text-align: left;
-        padding: 30pxpx;
-        position: relative;
-      }
-      .display-img:hover {
-        filter: brightness(1.05);
-        transform: scale(1.01);
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .display-img h3 {
-        color: white;
-        margin-right: 10%;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 3vw;
-        filter: drop-shadow(0px 2px 5px rgb(6, 6, 6));
-        margin-bottom: 10px;
-      }
-      .display-img p {
-        width: 400px;
-        color: rgb(255, 255, 255);
-        margin-right: 143px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-        margin-bottom: 10%;
-        filter: drop-shadow(0px 2px 5px rgb(6, 6, 6));
+      /* Massive Background Text (Behind Shoe) */
+      .hero-big-text {
+        position: absolute;
+        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        font-family: var(--font-head);
+        font-size: 25vw; /* MASSIVE */
+        line-height: 0.8;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.03); /* Subtle watermark */
+        white-space: nowrap;
+        z-index: 1;
+        pointer-events: none;
       }
 
-      .product-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        padding: 20px;
+      /* Floating Shoe (In Front) */
+      .hero-shoe-container {
+        position: relative; z-index: 2;
+        width: 60%; max-width: 800px;
+        animation: float 6s ease-in-out infinite;
       }
-      .img-box {
+      
+      .hero-shoe {
         width: 100%;
-        height: 200px;
-        overflow: hidden;
-        border-radius: 8px;
+        filter: drop-shadow(0 50px 50px rgba(0,0,0,0.8));
+        transform: rotate(-15deg);
       }
-      .img-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+
+      @keyframes float {
+        0% { transform: translateY(0px) rotate(-15deg); }
+        50% { transform: translateY(-30px) rotate(-12deg); }
+        100% { transform: translateY(0px) rotate(-15deg); }
+      }
+
+      /* Foreground Content */
+      .hero-content {
+        position: absolute; bottom: 10%; left: 5%; z-index: 3;
+        max-width: 500px;
+      }
+      
+      .hero-title {
+        font-family: var(--font-head); font-size: 4rem; text-transform: uppercase; line-height: 1; margin-bottom: 20px;
+        text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      }
+      .hero-title span { color: var(--accent); font-style: italic; }
+
+      .hero-btn {
+        padding: 18px 50px;
+        background: var(--white); color: black;
+        font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        border: none; cursor: pointer; clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+        transition: 0.3s;
+      }
+      .hero-btn:hover { background: var(--accent); color: white; padding-left: 60px; }
+
+      /* --- 4. PRODUCT GRID (Fixed Images) --- */
+      .section { padding: 120px 5%; background: #0a0a0a; position: relative; z-index: 4; }
+      
+      .section-header { margin-bottom: 80px; display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+      .section-title { font-family: var(--font-head); font-size: 3rem; text-transform: uppercase; }
+      
+      .grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
       }
 
       .card {
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        padding: 15px;
-        background-color: #fff;
-        transition: all 0.3s ease-in-out;
-        max-width: 250px;
-      }
-
-      .card img {
-        width: 100%;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .card h3 {
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #333;
-      }
-
-      .card p {
-        font-size: 14px;
-        color: #555;
-        margin-top: 10px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: x-small;
-        margin-bottom: 10px;
-      }
-      .card button {
-        background-color: #f2f2f2;
-        color: #333;
-        padding: 4px 10px;
-        border-radius: 8px;
-        font-size: 12px;
-        display: inline-block;
-        margin-right: 5px;
-      }
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease-in-out;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        padding: 20px;
+        transition: 0.3s;
         cursor: pointer;
       }
-      .card:active {
-        transform: scale(0.98);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      .card:hover { border-color: var(--accent); transform: translateY(-10px); }
+
+      .card-img-box {
+        height: 350px; width: 100%; overflow: hidden; margin-bottom: 20px;
+        background: #151515; position: relative;
       }
-      .center-btn {
-        text-align: center;
-      }
-      .center-btn button {
-        background-color: #ffd580;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background 0.3s ease;
-      }
-      .card button:hover,
-      .center-btn button:hover {
-        background-color: #ffb700;
-        transform: scale(1.05);
-        transition: all 0.3s ease;
-      }
-      .card button:active,
-      .center-btn button:active {
-        transform: scale(0.95);
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-      }
+      .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+      .card:hover .card-img { transform: scale(1.1); }
+      
+      .card-info h3 { font-family: var(--font-head); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 5px; }
+      .card-price { color: var(--accent); font-weight: 700; font-size: 1.2rem; }
+
+      /* --- 5. THE MANIFESTO FOOTER --- */
       .footer {
-        display: grid;
-        grid-template-areas:
-          "A B"
-          "C C";
-        background-color: #fff;
-        padding: 30px;
-        margin-top: 40px;
-        border-top: 1px solid #ccc;
+        background: #000;
+        padding: 100px 5% 50px;
+        border-top: 1px solid var(--border);
       }
 
-      .contact-info h4,
-      .contact-form h4 {
-        font-size: 18px;
-        margin-bottom: 10px;
-        color: #222;
+      .footer-top {
+        display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 80px;
       }
+      
+      .footer-headline {
+        font-family: var(--font-head); font-size: 5vw; text-transform: uppercase; line-height: 0.9; margin-bottom: 40px; color: #fff;
+      }
+      .footer-headline span { color: var(--accent); }
 
-      .contact-info p {
-        font-size: 14px;
-        color: #444;
-        margin-bottom: 6px;
+      .newsletter-box {
+        position: relative; width: 100%; max-width: 600px;
       }
+      .news-input {
+        width: 100%; padding: 20px; background: transparent; border: none; border-bottom: 2px solid #333;
+        color: white; font-size: 1.5rem; outline: none; text-align: center;
+      }
+      .news-input:focus { border-color: var(--accent); }
+      
+      .news-btn {
+        margin-top: 20px; background: transparent; color: #888; border: none; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; font-size: 0.9rem;
+      }
+      .news-btn:hover { color: var(--white); }
 
-      .contact-info i {
-        margin-right: 8px;
-        color: #ffd580;
+      .footer-bottom {
+        display: flex; justify-content: space-between; align-items: flex-end;
+        border-top: 1px solid #222; padding-top: 30px;
       }
+      
+      .footer-links { display: flex; gap: 30px; }
+      .footer-links a { color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+      .footer-links a:hover { color: var(--accent); }
 
-      .contact-form {
-        text-align: right;
+      .big-logo {
+        font-family: var(--font-head); font-size: 15vw; line-height: 0.7; color: #111;
+        position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); pointer-events: none; z-index: 0;
       }
+      .footer { position: relative; overflow: hidden; }
 
-      .contact-form form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        padding: 8px;
-        border: 1px solid #aaa;
-        border-radius: 4px;
-        width: 100%;
-      }
-
-      .contact-form button {
-        padding: 10px;
-        background-color: #333;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .contact-form button i {
-        margin-right: 5px;
-      }
-
-      .contact-form button:hover {
-        background-color: #555;
-      }
-      .copy {
-        grid-area: C;
-        text-align: center;
-        font-size: x-large;
-        margin: 10px 0px;
-        color: #333;
-      }
-      @media (max-width: 600px) {
-        .display-img {
-          width: 95vw;
-          height: 50vh;
-          padding: 15px;
-        }
-        .display-img h3 {
-          font-size: 6vw;
-          margin-right: 5%;
-        }
-        .display-img p {
-          font-size: 4vw;
-        }
-      }
-      @media (max-width: 500px) {
-        .card h3 {
-          font-size: 16px;
-        }
-        .card p {
-          font-size: 12px;
-        }
-        .card button {
-          font-size: 10px;
-          padding: 4px 8px;
-        }
-        .center-btn button {
-          padding: 6px 12px;
-          font-size: 13px;
-        }
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        .hero-big-text { font-size: 20vw; }
+        .hero-content { bottom: 5%; left: 5%; text-align: left; }
+        .footer-headline { font-size: 3rem; }
       }
     </style>
   </head>
   <body>
-    <header class="header">
-      <div class="logo">
-        <img src="logo.jpg" alt="Logo" />
-      </div>
-      <nav class="navbar">
-        <ul>
-          <li>
-            <a href="#"><i class="fas fa-home"></i> Home</a>
-          </li>
-          <li>
-            <a href="#"><i class="fas fa-box"></i> Products</a>
-          </li>
-          <li>
-            <a href="#"><i class="fas fa-info-circle"></i> About</a>
-          </li>
-          <li>
-            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <div class="center-wrapper">
-      <section class="display-img">
-        <h3>Charles Shoes</h3>
-        <p>
-          Discover timeless sophistication with our curated collection of high
-          quality shoes, crafted for comfort, style, and lasting impressions.
-          Whether it is casual outing or a formal event, step confidently with
-          Charles Shoes. step into elegance. explore premium comfort and
-          unmatched design with Charles Shoes. Where elegance meets evryday
-          style our shoes are designed with precision, quality materials, and a
-          passion for timeless fashion.
-        </p>
-      </section>
-    </div>
 
-    <section class="product-grid">
-      <div class="card">
-        <div class="img-box">
-          <img src="Product 1.webp" alt="Product 1" />
-        </div>
-        <h3>Classic Boots</h3>
-        <button>Small</button>
-        <button>Medium</button>
-        <p>
-          Lorem ipsum dolor sit amet. Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. Porro, a.
-        </p>
-        <div class="center-btn">
-          <button>Add To Cart</button>
-        </div>
+    <nav class="header">
+      <div class="logo">CHARLES<span>.</span></div>
+      <div class="nav-links">
+        <a href="#">Men</a>
+        <a href="#">Women</a>
+        <a href="#">New Drops</a>
       </div>
-      <div class="card">
-        <div class="img-box">
-          <img src="Product 2.webp" alt="Product 2" />
-        </div>
-        <h3>Royal Blue Exclusive</h3>
-        <button>Small</button>
-        <button>Medium</button>
-        <p>
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Quia, suscipit!
-        </p>
-        <div class="center-btn">
-          <div class="center-btn">
-            <button>Add To Cart</button>
+      <div class="cart-btn"><i class="fas fa-shopping-bag"></i></div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-big-text">AIR MAX</div>
+      
+      <div class="hero-shoe-container">
+        <img src="https://parspng.com/wp-content/uploads/2023/02/shoespng.parspng.com-12.png" alt="Jordan High" class="hero-shoe">
+      </div>
+
+      <div class="hero-content" data-aos="fade-up">
+        <h1 class="hero-title">Defy <br> <span>Gravity.</span></h1>
+        <button class="hero-btn">Shop The Drop</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header" data-aos="fade-up">
+        <h2 class="section-title">Latest Heat</h2>
+        <span style="color:#666">FALL / WINTER 2025</span>
+      </div>
+
+      <div class="grid">
+
+        <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-aos="fade-up">
+          <div class="card-img-box">
+            <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?q=80&w=2050&auto=format&fit=crop" class="card-img">
+          </div>
+          <div class="card-info">
+            <h3>Nike Air Max 97</h3>
+            <span class="card-price">$180.00</span>
           </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="img-box">
-          <img src="Product 3.png" alt="Product 3" />
+
+        <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-img-box">
+            <img src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?q=80&w=1974&auto=format&fit=crop" class="card-img">
+          </div>
+          <div class="card-info">
+            <h3>Jordan 1 Retro</h3>
+            <span class="card-price">$240.00</span>
+          </div>
         </div>
-        <h3>Iconic Red Heels</h3>
-        <button>Small</button>
-        <button>Medium</button>
-        <p>
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Facilis, ut!
-        </p>
-        <div class="center-btn">
-          <button>Add To Cart</button>
+
+        <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-img-box">
+            <img src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?q=80&w=2024&auto=format&fit=crop" class="card-img">
+          </div>
+          <div class="card-info">
+            <h3>Urban Utility</h3>
+            <span class="card-price">$150.00</span>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="img-box">
-          <img src="Product 4.webp" alt="Product 4" />
+
+        <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-aos="fade-up">
+          <div class="card-img-box">
+            <img src="https://images.unsplash.com/photo-1520639888713-7851133b1ed0?q=80&w=1974&auto=format&fit=crop" class="card-img">
+          </div>
+          <div class="card-info">
+            <h3>Hunter Boot</h3>
+            <span class="card-price">$210.00</span>
+          </div>
         </div>
-        <h3>Daily Wears</h3>
-        <button>Small</button>
-        <button>Medium</button>
-        <p>
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Facilis, ut!
-        </p>
-        <div class="center-btn">
-          <button>Add To Cart</button>
+
+        <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-img-box">
+            <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?q=80&w=2079&auto=format&fit=crop" class="card-img">
+          </div>
+          <div class="card-info">
+            <h3>Yeezy Desert</h3>
+            <span class="card-price">$280.00</span>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="img-box">
-        <img src="Product 5.webp" alt="Product 5" />
+
+        <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-img-box">
+            <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=2080&auto=format&fit=crop" class="card-img">
+          </div>
+          <div class="card-info">
+            <h3>Azure High</h3>
+            <span class="card-price">$160.00</span>
+          </div>
         </div>
-        <h3>Comfy Shoes</h3>
-        <button>Small</button>
-        <button>Medium</button>
-        <p>
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Facilis, ut!
-        </p>
-        <div class="center-btn">
-          <button>Add To Cart</button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="img-box">
-        <img src="Product 6.jpeg" alt="Product 6" />
-        </div>
-        <h3>Joggers</h3>
-        <button>Small</button>
-        <button>Medium</button>
-        <p>
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Facilis, ut!
-        </p>
-        <div class="center-btn">
-          <button>Add To Cart</button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="img-box">
-        <img src="Product 7.avif" alt="Product 7" />
-        </div>
-        <h3>Lavish Butterscotch Heels</h3>
-        <button>Small</button>
-        <button>Medium</button>
-        <p>
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Facilis, ut!
-        </p>
-        <div class="center-btn">
-          <button>Add To Cart</button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="img-box">
-        <img src="Product 8.webp" alt="Product 8" />
-        </div>
-        <h3>Milky White Heels</h3>
-        <button>Small</button>
-        <button>Medium</button>
-        <p>
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Facilis, ut!
-        </p>
-        <div class="center-btn">
-          <button>Add To Cart</button>
-        </div>
+
       </div>
     </section>
 
     <footer class="footer">
-      <div class="contact-info">
-        <h4><i class="fas fa-address-card"></i> Contact Info</h4>
-        <p><i class="fas fa-envelope"></i> example@mail.com</p>
-        <p><i class="fas fa-phone"></i> 123-4567890</p>
-        <p><i class="fa-solid fa-globe"></i> &nbsp;www.charlesshoes.pk</p>
-        <p>
-          <i class="fa-solid fa-location-dot"></i> &nbsp;121 A1 Block Johar Town
-          Lahore
-        </p>
+      <div class="footer-top">
+        <h2 class="footer-headline">Don't Miss <br> The Next <span>Drop.</span></h2>
+        
+        <div class="newsletter-box">
+          <input type="email" placeholder="ENTER YOUR EMAIL" class="news-input">
+          <button class="news-btn">Subscribe to the List</button>
+        </div>
       </div>
 
-      <div class="contact-form">
-        <h4><i class="fas fa-paper-plane"></i> Contact Us</h4>
-        <form>
-          <input type="text" placeholder="Your Name" />
-          <input type="email" placeholder="Your Email" />
-          <textarea rows="3" placeholder="Your Message"></textarea>
-          <button type="submit"><i class="fas fa-paper-plane"></i> Send</button>
-        </form>
-      </div>
-      <div class="copy">
-        <h6>&copy;CopyRight Reserved By Charles Shoes</h6>
+      <div class="big-logo">CHARLES</div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy" style="color:#444; font-size:12px;">© 2024 CHARLES. LAHORE.</div>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">Legal</a>
+        </div>
       </div>
     </footer>
 
-    <script
-      src="https://kit.fontawesome.com/c4e853bafd.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    
+    <script>
+      AOS.init({ duration: 1000, once: true });
+      
+      // Tilt Config
+      VanillaTilt.init(document.querySelectorAll(".card"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2
+      });
+    </script>
   </body>
 </html>
