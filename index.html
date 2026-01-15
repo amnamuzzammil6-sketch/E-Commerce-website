@@ -40,7 +40,7 @@
       .nav-links a { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #aaa; }
       .nav-links a:hover { color: white; }
       .nav-right { display: flex; gap: 20px; align-items: center; z-index: 1001; }
-      .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+      .menu-toggle { display: none; font-size: 24px; cursor: pointer; color: white; }
 
       .mobile-menu {
         position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
@@ -48,7 +48,7 @@
         gap: 30px; transform: translateY(-100%); transition: 0.5s ease; z-index: 1000;
       }
       .mobile-menu.active { transform: translateY(0); }
-      .mobile-menu a { font-family: var(--font-head); font-size: 2rem; text-transform: uppercase; }
+      .mobile-menu a { font-family: var(--font-head); font-size: 2rem; text-transform: uppercase; color: white; }
 
       /* --- HERO SECTION --- */
       .hero {
@@ -61,11 +61,21 @@
         font-family: var(--font-head); font-size: 22vw; font-weight: 700;
         color: rgba(255, 255, 255, 0.03); white-space: nowrap; z-index: 1; pointer-events: none;
       }
+      
       .hero-shoe-container {
         position: relative; z-index: 2; width: 55%; max-width: 750px;
         animation: float 6s ease-in-out infinite;
+        /* Ensure visual visibility */
+        display: block; 
       }
-      .hero-shoe { width: 100%; filter: drop-shadow(0 30px 40px rgba(0,0,0,0.8)); transform: rotate(-15deg); }
+      
+      .hero-shoe { 
+        width: 100%; 
+        filter: drop-shadow(0 30px 40px rgba(0,0,0,0.8)); 
+        transform: rotate(-15deg); 
+        display: block; /* Fix for some browsers */
+      }
+
       @keyframes float { 0%, 100% { transform: translateY(0px) rotate(-15deg); } 50% { transform: translateY(-30px) rotate(-10deg); } }
 
       .hero-content { position: absolute; bottom: 10%; left: 5%; z-index: 3; max-width: 500px; }
@@ -107,7 +117,7 @@
       .big-footer-logo { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-family: var(--font-head); font-size: 18vw; color: rgba(255,255,255,0.02); white-space: nowrap; z-index: 1; pointer-events: none; }
       .footer-bottom { position: relative; z-index: 2; border-top: 1px solid #111; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; color: #444; font-size: 0.8rem; text-transform: uppercase; }
 
-      /* --- MOBILE ADJUSTMENTS (FIXED) --- */
+      /* --- MOBILE ADJUSTMENTS (UPDATED) --- */
       @media (max-width: 1024px) { .footer-main { grid-template-columns: 1fr 1fr; } }
       
       @media (max-width: 768px) {
@@ -117,25 +127,32 @@
         /* 1. Reset Hero Layout for Mobile */
         .hero { 
             height: 100vh;
-            min-height: 600px; /* Ensures tall content doesn't get cut off */
+            min-height: 650px; /* Force minimum height so content fits */
             flex-direction: column; 
-            padding-top: 0; /* Remove top padding to allow centering */
-            justify-content: center; /* Vertically center content */
+            padding-top: 0; 
+            justify-content: center; 
             align-items: center;
         }
 
-        /* 2. Adjust Background Text Position */
+        /* 2. Adjust Background Text to sit BEHIND the shoe */
         .hero-big-text { 
             font-size: 30vw; 
-            top: 40%; /* Move slightly up */
+            top: 35%; /* Move it up slightly */
+            z-index: 0;
         }
 
-        /* 3. Fix Shoe Container Width & Spacing */
+        /* 3. Make Shoe Container Bigger & Central */
         .hero-shoe-container { 
-            width: 75%; /* Reduced from 85% to stop overflow */
-            max-width: 350px;
+            width: 90%; /* Increased size for pop */
+            max-width: 380px;
             margin-top: 0; 
-            margin-bottom: 20px;
+            margin-bottom: 30px; /* Space between shoe and text */
+            z-index: 10; /* Force it ON TOP of everything */
+        }
+        
+        .hero-shoe {
+             /* Remove drop shadow if it causes clipping, or adjust it */
+             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));
         }
 
         /* 4. Fix Content Alignment */
@@ -145,12 +162,13 @@
             left: unset; 
             text-align: center; 
             width: 100%; 
-            margin-top: 10px; 
-            padding: 0 20px; 
+            margin-top: 0; 
+            padding: 0 20px;
+            z-index: 10;
         }
 
         .hero-title { font-size: 3rem; }
-        .hero-btn { width: 100%; max-width: 250px; }
+        .hero-btn { width: 100%; max-width: 280px; margin: 0 auto; display: block; }
 
         /* Footer Mobile Fixes */
         .footer-main { grid-template-columns: 1fr; text-align: center; gap: 40px; }
