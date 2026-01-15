@@ -65,15 +65,15 @@
       .hero-shoe-container {
         position: relative; z-index: 2; width: 55%; max-width: 750px;
         animation: float 6s ease-in-out infinite;
-        /* Ensure visual visibility */
         display: block; 
       }
       
       .hero-shoe { 
         width: 100%; 
+        height: auto;
         filter: drop-shadow(0 30px 40px rgba(0,0,0,0.8)); 
         transform: rotate(-15deg); 
-        display: block; /* Fix for some browsers */
+        display: block; 
       }
 
       @keyframes float { 0%, 100% { transform: translateY(0px) rotate(-15deg); } 50% { transform: translateY(-30px) rotate(-10deg); } }
@@ -117,7 +117,7 @@
       .big-footer-logo { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-family: var(--font-head); font-size: 18vw; color: rgba(255,255,255,0.02); white-space: nowrap; z-index: 1; pointer-events: none; }
       .footer-bottom { position: relative; z-index: 2; border-top: 1px solid #111; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; color: #444; font-size: 0.8rem; text-transform: uppercase; }
 
-      /* --- MOBILE ADJUSTMENTS (UPDATED) --- */
+      /* --- MOBILE ADJUSTMENTS (FIXED) --- */
       @media (max-width: 1024px) { .footer-main { grid-template-columns: 1fr 1fr; } }
       
       @media (max-width: 768px) {
@@ -127,42 +127,44 @@
         /* 1. Reset Hero Layout for Mobile */
         .hero { 
             height: 100vh;
-            min-height: 650px; /* Force minimum height so content fits */
+            min-height: 650px; 
             flex-direction: column; 
             padding-top: 0; 
             justify-content: center; 
             align-items: center;
         }
 
-        /* 2. Adjust Background Text to sit BEHIND the shoe */
+        /* 2. Background Text Fix */
         .hero-big-text { 
             font-size: 30vw; 
-            top: 35%; /* Move it up slightly */
+            top: 35%; 
             z-index: 0;
         }
 
-        /* 3. Make Shoe Container Bigger & Central */
+        /* 3. Shoe Container - Increased Size & Priority */
         .hero-shoe-container { 
-            width: 90%; /* Increased size for pop */
+            width: 90%; 
             max-width: 380px;
             margin-top: 0; 
-            margin-bottom: 30px; /* Space between shoe and text */
-            z-index: 10; /* Force it ON TOP of everything */
+            margin-bottom: 20px;
+            z-index: 10;
         }
         
         .hero-shoe {
-             /* Remove drop shadow if it causes clipping, or adjust it */
              filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));
+             width: 100%;
+             height: auto;
+             display: block;
         }
 
-        /* 4. Fix Content Alignment */
+        /* 4. Content Alignment */
         .hero-content { 
             position: relative; 
             bottom: unset; 
             left: unset; 
             text-align: center; 
             width: 100%; 
-            margin-top: 0; 
+            margin-top: 10px; 
             padding: 0 20px;
             z-index: 10;
         }
@@ -204,7 +206,7 @@
     <section class="hero">
       <div class="hero-big-text">AIR MAX</div>
       <div class="hero-shoe-container">
-        <img src="https://parspng.com/wp-content/uploads/2023/02/shoespng.parspng.com-12.png" alt="Hero Shoe" class="hero-shoe">
+        <img src="https://parspng.com/wp-content/uploads/2023/02/shoespng.parspng.com-12.png" alt="Hero Shoe" class="hero-shoe" referrerpolicy="no-referrer">
       </div>
       <div class="hero-content" data-aos="fade-up">
         <h1 class="hero-title">Defy <br> <span>Gravity.</span></h1>
